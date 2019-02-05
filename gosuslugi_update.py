@@ -10,7 +10,7 @@ import sys
 '''Реализация многопоточной обработки информации о контактах,
 загружаемой для каждого подразделения в виде Json с портала ГОСУСЛУГ
 '''
-
+ #git remote add origin https://github.com/georgepavlov/test-project.git
 def update_contact(dptcod, contact):
     count = 0
     query = "UPDATE gosuslugi SET contact = %s WHERE dptcod = %s"
