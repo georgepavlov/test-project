@@ -1,0 +1,94 @@
+<nav ng-if="role == '0'" class="navbar navbar-fixed-top" style="background-color: #DEECFA;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#reports"><strong>PUZZLE</strong></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#reports"><strong>Отчеты</strong></a></li>
+                <li><a href="#smsinfo"><strong>SMS-опрос</strong></a></li>
+                <li><a href="#instruction"><strong>О программе "Puzzle"</strong><span class="glyphicon glyphicon-book">&nbsp;</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/><br/><br/>
+<h4>Архив отчетов</h4>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Список отчетов
+                <div class="sw-search">
+                    <div class="nav-search" id="nav-search">
+                        Фильтр: <span class="input-icon">
+                        <!--<input placeholder="Фильтр ..." class="nav-search-input" ng-model="filterReport" ng-change="resetLimit();" autocomplete="off" type="text" style="width:300px;" focus>-->
+                        <input placeholder="Фильтр ..." class="nav-search-input" ng-model="filterReport" type="text"
+                               style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <h4>Строк: {{filteredReports.length}}</h4>
+                <table class="table table-condensed table-hover table-bordered">
+                    <tr ng-show="reports.length==0">
+                        <td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td>
+                    </tr>
+                    <tr ng-hide="reports.length>-1">
+                        <td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td>
+                    </tr>
+                    <tr>
+                        <th>№&nbsp;</th>
+                        <th>ID</th>
+                        <th>Наименование</th>
+                        <th>Комментарии</th>
+                        <th>На дату</th>
+                        <th>Срок исп.</th>
+                        <th>Действия</th>
+                    </tr>
+                    <tbody>
+                    <tr ng-repeat="c in filteredReports = (reports | filter:filterReport)">
+                    <tr ng-repeat="c in filteredReports">
+                        <td>{{$index + 1}}</td>
+                        <td>{{c.id_arch}}</td>
+                        <td>{{c.name_rep}}</td>
+                        <td>{{c.comment}}</td>
+                        <td>{{c.dateon | date  : 'dd.MM.yyyy' : '+3.00'}}</td>
+                        <td>{{c.dateisp}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                        aria-expanded="false">
+                                    Варианты <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" style="right: 0; left: auto;" role="menu">
+                                    <li><a href="out/{{c.path_out}}?act=6&id_rep={{c.id_arch}}" target="_blank">
+                                        Выходная форма отчета</a></li>
+                                    <li><a href="out_xls/{{c.path_out}}?act=6&id_rep={{c.id_arch}}" target="_blank">
+                                        Отчет в виде XLS-файла</a></li>
+                                    <li ng-if="priem[$index] > 0 && $index < 6"><a href="out_xls/2reception_mfc.php?id_rep={{c.id_arch}}" target="_blank">
+                                        Отчет в виде XLS-файла(2)</a></li>
+                                    <li ng-if="dgu[$index] > 0"><a href="out_xls/dgu_reception_mfc.php?id_rep={{c.id_arch}}" target="_blank">
+                                        Ежемесячный отчет в ДГУ</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#action/6/{{c.id_arch}}">Таблица БД</a></li>
+                                    <li ng-if="role == '2'" class="divider"></li>
+                                    <li ng-if="role == '2'"><a href="#action/7/{{c.id_arch}}">Удалить из архива</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

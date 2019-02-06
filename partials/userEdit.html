@@ -1,0 +1,47 @@
+    <button type="button" class="close" ng-click="cancel();">
+        <i class="fa fa-times-circle-o" style="margin:10px;color:blue;"></i>
+    </button>
+    <div class="modal-header">
+        <h3 class="modal-title">Редактируем строку [uid: {{user.uid}}]</h3>
+    </div>
+    <div class="modal-body">
+        <form name="user_form" class="form-horizontal" role="form" novalidate>
+            <form-element label="Пользователь" mod="user">
+                <input ng-if="user.uid" type="text" class="form-control" name="login" placeholder="Пользователь" ng-model="user.login" ng-disabled="user.uid"/>
+                <input ng-if="!user.uid" type="text" class="form-control" name="login" placeholder="Пользователь" ng-model="user.login" focus-me="true"/>
+            </form-element>
+            <form-element label="Роль" mod="user">
+                <input type="text" class="form-control" name="role" placeholder="Роль" ng-model="user.role"/>
+            </form-element>
+            <form-element label="Пароль" mod="user">
+                <input type="password" class="form-control" name="password" placeholder="Пароль" ng-model="user.password"/>
+            </form-element>
+            <form-element label="Ф.И.0." mod="user">
+                <input type="text" name="fio" class="form-control" placeholder="Ф.И.О." ng-model="user.fio" />
+            </form-element>
+           <form-element label="Email" mod="user">
+                <input type="text" name="email" class="form-control" placeholder="Email" ng-model="user.email" />
+            </form-element>
+            <form-element label="Телефон" mod="user">
+                <input type="text" name="phone" class="form-control" placeholder="Телефон" ng-model="user.phone"/>
+                <small class="errorMessage" ng-show="user_form.phone.$dirty && user_form.phone.$invalid"> Enter the Phone.</small>
+            </form-element>
+
+            <div class="space"></div>
+            <div class="space-4"></div>
+            <div class="modal-footer">
+                <form-element label="">
+                    <div class="text-right">
+                        <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Отмена</a>
+                        <button ng-click="saveUser(user);"
+                                ng-disabled="user_form.$invalid || enableUpdate"
+                                class="btn btn-sm btn-primary"
+                                type="submit">
+                            <i class="ace-icon fa fa-check"></i>{{buttonText}}
+                        </button>
+                    </div>
+                </form-element>
+            </div>
+        </form>
+    </div>
+

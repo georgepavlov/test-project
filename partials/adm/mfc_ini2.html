@@ -1,0 +1,67 @@
+<br /><br /><br />
+<div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+         <div class="panel-heading">Параметры для чтения xls-файлов МФЦ
+         </div>
+          <div class="panel-body">
+            <small>
+                <form name="form" role="form" novalidate>
+                <div class="form-group">
+                 <label for="first_row">Номер первой строки данных</label>
+                  <input type="text" class="form-control input-sm" name="first_row" id="first_row" placeholder="номер первой строки"
+                  ng-model="mfcini2[0].first_row" ng-pattern="/^[0-9]*$/" required/>
+                  <span ng-show="form.$submitted || form.first_row.$error.pattern" class="text-danger">Недопустимо!</span>
+                </div>
+                <div class="form-group">
+                 <label for="nmb_col_name">Номер колонки с наименованием МФЦ</label>
+                  <input type="text" class="form-control input-sm" name="nmb_col_name" id="nmb_col_name" placeholder="колонка наименования"
+                  ng-model="mfcini2[0].nmb_col_name" ng-pattern="/^[0-9]*$/" required/>
+                  <span ng-show="form.$submitted || form.nmb_col_name.$error.pattern" class="text-danger">Недопустимо!</span>
+                </div>
+                <div class="form-group">
+                 <label for="nmb_col_adr">Номер колонки с адресом МФЦ</label>
+                  <input type="text" class="form-control input-sm" name="nmb_col_adr" id="nmb_col_adr" placeholder="колонка адреса"
+                  ng-model="mfcini2[0].nmb_col_adr" ng-pattern="/^[0-9]*$/" required/>
+                  <span ng-show="form.$submitted || form.nmb_col_adr.$error.pattern" class="text-danger">Недопустимо!</span>
+                </div>
+                <div class="form-group">
+                 <label for="nmb_col_data">Номер первой колонки данных</label>
+                  <input type="text" class="form-control input-sm" name="nmb_col_data" id="nmb_col_data" placeholder="колонка данных"
+                  ng-model="mfcini2[0].nmb_col_data" ng-pattern="/^[0-9]*$/" required/>
+                  <span ng-show="form.$submitted || form.nmb_col_data.$error.pattern" class="text-danger">Недопустимо!</span>
+                </div>
+                <!--
+                <div class="form-group">
+                 <label for="strnmb_nomer">Номер строки с номерами госуслуг</label>
+                  <input type="text" class="form-control input-sm" name="strnmb_nomer" id="strnmb_nomer" placeholder="строка номеров госуслуг"
+                  ng-model="mfcini[0].strnmb_nomer" ng-pattern="/^[0-9]*$/" required/>
+                  <span ng-show="form.$submitted || form.strnmb_nomer.$error.pattern" class="text-danger">Недопустимо!</span>
+                </div>
+                -->
+                <div class="form-group">
+                 <label for="strnmb_nam">Номер строки с наименованиями госуслуг</label>
+                  <input type="text" class="form-control input-sm" name="strnmb_nam" id="strnmb_nam" placeholder="строка наименований госуслуг"
+                  ng-model="mfcini2[0].strnmb_nam" ng-pattern="/^[0-9]*$/" required/>
+                  <span ng-show="form.$submitted || form.strnmb_nam.$error.pattern" class="text-danger">Недопустимо!</span>
+                </div>
+                <div class="form-group">
+                 <label for="col_lst_nmb">Список колонок с наименованиями госуслуг</label>
+                  <input type="text" class="form-control input-sm" name="col_lst_nmb" id="col_lst_nmb" placeholder="E,H,K,..."
+                  ng-model="mfcini2[0].col_lst_nmb" ng-pattern="/^[A-Z\,]*$/" required/>
+                  <span ng-show="form.$submitted || form.col_lst_nmb.$error.pattern" class="text-danger">Недопустимо!</span>
+                </div>
+                <div class="form-group">
+                 <label for="col_lst_data">Список колонок с данными</label>
+                  <input type="text" class="form-control input-sm" name="col_lst_data" id="col_lst_data" placeholder="F,I,L,..."
+                  ng-model="mfcini2[0].col_lst_data" ng-pattern="/^[A-Z\,]*$/" required/>
+                  <span ng-show="form.$submitted || form.col_lst_data.$error.pattern" class="text-danger">Недопустимо!</span>
+                </div>
+                  <input type="button" ng-click="reset()" value="Сброс" />
+                  <input type="submit" class="pull-right" ng-click="send()" ng-disabled="enableBtn==0" value="Сохранить" />
+                </form>
+            </small>
+          </div>
+        </div>
+      </div>
+</div>

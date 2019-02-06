@@ -1,0 +1,40 @@
+<br /><br /><br />
+<h4>{{report.name_rep}}</h4>
+
+<div class="panel panel-primary">
+ <div class="panel-heading">Работа исполнителей
+  </div>
+   <div class="panel-body">
+   <h4>Строк: {{reports.length}}</h4>
+   <div class="table-responsive">
+    <table class="table table-condensed table-bordered table-hover text-center">
+    <tr ng-show="reports.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="reports.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+            <thead style="color:#642383; background-color:#DAFEF3;">
+            <tr>
+            <th class="text-center vert-align" rowspan="2">№&nbsp;</th>
+            <th class="text-center vert-align" rowspan="2">Пользователь</th>
+            <th class="text-center vert-align" rowspan="2">Наименование</th>
+            <th class="text-center" colspan="3">Статус</th>
+            </tr>
+            <tr>
+            <th class="text-center">ВВОД</th>
+            <th class="text-center">ПРОЦ</th>
+            <th class="text-center">ЗВРШ</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in reports">
+                    <td>{{$index + 1}}</td>
+                    <td>{{c.login}}</td>
+                    <td class="text-left">{{c.fio}}</td>
+                    <td>{{c.vvod}}</td>
+                    <td>{{c.proc}}</td>
+                    <td>{{c.zvrsh}}</td>
+                </tr>
+            </tbody>
+     </table>
+    </div>
+   </div>
+
+ </div>

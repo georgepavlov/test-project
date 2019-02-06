@@ -1,0 +1,21 @@
+<br /><br /><br />
+<h4>Удаление отчета из архива.</h4>
+<div class="row">
+ <div class="col-md-12">
+  <div class="panel panel-primary">
+      <div class="panel-heading">Наименование: {{report.name_rep}}.
+      &nbsp;Идентификатор: {{report.id_arch}}
+      &nbsp;Иформация на: {{report.dateon}}
+      &nbsp;Срок исполнения: {{report.dateisp}}
+      </div>
+     <div class="panel-body">
+      <blockquote class="text-danger">
+         <p>Вы уверены, что необходимо удалить этот отчет из архива !?</p>
+      </blockquote>
+      <form>
+         <button class="btn btn-success" ng-click="myForm.submitTheForm()" ng-disabled="enableBtn==0">Удалить</button>
+      </form>
+     </div>
+  </div>
+ </div>
+</div>

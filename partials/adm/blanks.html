@@ -1,0 +1,38 @@
+<br /><br /><br />
+<h4>Подготовка шаблонов отчетов</h4>
+<div class="panel panel-primary">
+  <div class="panel-heading">Шаблоны (бланки)
+  </div>
+   <div class="panel-body">
+   <h4>Строк: {{reports.length}}</h4>
+    <table class="table table-condensed table-hover table-bordered">
+    <tr ng-show="reports.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="reports.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+            <tr>
+            <th>№&nbsp;</th>
+            <th>ID</th>
+            <th>Наименование</th>
+            <th>Комментарии</th>
+            <th>Действия</th>
+            </tr>
+            <tbody>
+                <tr ng-repeat="c in reports">
+                    <td>{{$index + 1}}</td>
+                    <td>{{c.id_rep}}</td>
+                    <td>{{c.name_rep}}</td>
+                    <td>{{c.comment}}</td>
+                    <td>
+                     <div class="btn-group">
+                       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                         Варианты <span class="caret"></span>
+                       </button>
+                       <ul class="dropdown-menu" role="menu">
+                          <li><a href="#blank/{{c.id_rep}}">Редактировать</a></li>
+                          <li ng-if = "role == '2'"><a href="#action/4/{{c.id_rep}}">Удалить бланк</a></li>
+                       </ul>
+                     </div>
+                    </td>
+                </tr>
+            </table>
+    </div>
+ </div>

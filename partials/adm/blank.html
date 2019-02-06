@@ -1,0 +1,47 @@
+<h3>Редактирование бланка отчета</h3>
+<hr/>
+<div ng-if="role=='2'">
+<button type="button" class="btn btn-danger fa fa-plus" ng-click="open(blank);">&nbsp;Добавить строку</button>
+</div>
+
+<div class="panel panel-primary">
+      <div class="panel-heading">Шаблоны (бланки). Отчет номер: {{blank.id_rep}}
+       <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Фильтр: <span class="input-icon">
+                        <input placeholder="Фильтр ..." class="nav-search-input" ng-model="filterBlank" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+            </div>
+        </div>
+   </div>
+  <div class="panel-body">
+  <h4>Строк: {{filteredBlanks.length}}</h4>
+  <div class="table-responsive">
+    <table class="table table-striped">
+    <tr ng-show="blanks.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="blanks.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+
+    <!--<tr><th ng-repeat="c in columns">{{c.text}}</th></tr>-->
+
+    <tr><th><a href="" ng-click="reverse=!reverse;order('id',reverse)">ID</a></th><th>ID-отчета</th>
+        <th><a href="" ng-click="reverse=!reverse;order('str_nmb',reverse)">Строка</a></th>
+        <th><a href="" ng-click="reverse=!reverse;order('direct',reverse)">Направление</a></th>
+        <th>Описание</th><th>Величина</th><th>Ед. изм.</th><th>Изменить</th>
+    </tr>
+
+    <!--<tr ng-repeat="c in blanks | filter:filterUser | orderBy:'-id'" id="{{c.id}}" animate-on-change='c.id+c.id_rep+c.direct+c.str_nmb+c.descr+c.pval+c.dimen' ng-animate=" 'animate'">-->
+    <tr ng-repeat="c in filteredBlanks = (blanks | filter:filterBlank)" animate-on-change='c.id+c.id_rep+c.direct+c.str_nmb+c.descr+c.pval+c.dimen' ng-animate=" 'animate'">
+        <td><small>{{c.id}}</small></td><td><small>{{c.id_rep}}</small></td><td><small>{{c.str_nmb}}</small></td><td><small>{{c.direct}}</small></td>
+        <td><small>{{c.descr}}</small></td><td><small>{{c.pval}}</small></td><td><small>{{c.dimen}}</small></td>
+           <td style="width:100px">
+            <div class="btn-group">
+              <button type="button" class="btn btn-success fa fa-edit" ng-click="open(c);"></button>
+              <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="deleteBlank(c);" ng-disabled="role=='0'"></button>
+            </div>
+           </td>
+     </tr>
+    </table>
+  </div>
+</div>
+</div>

@@ -1,0 +1,34 @@
+<br /><br /><br />
+<h4>{{report.name_rep}}</h4>
+
+<div class="panel panel-primary">
+      <div class="panel-heading">Строки отчета
+       <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Фильтр: <span class="input-icon">
+                        <input placeholder="Фильтр ..." class="nav-search-input" ng-model="filterReport" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+            </div>
+        </div>
+   </div>
+  <div class="panel-body">
+  <h4>Строк: {{filteredReports.length}}</h4>
+  <div class="table-responsive">
+    <table class="table table-striped">
+    <tr ng-show="reports.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="reports.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+     <tr><th><a href="" ng-click="reverse=!reverse;order('id',reverse)">ID</a></th>
+         <th><a href="" ng-click="reverse=!reverse;order('login',reverse)">Пользователь</a></th>
+         <th><a href="" ng-click="reverse=!reverse;order('direct',reverse)">Направление</a></th>
+         <th><a href="" ng-click="reverse=!reverse;order('str_nmb',reverse)">Строка</a></th>
+         <th>Описание</th><th>Величина</th><th>Ед. изм.</th><th>На дату</th><th>Статус</th>
+     </tr>
+     <tr ng-repeat="c in filteredReports = (reports | filter:filterReport)">
+        <td>{{c.id}}</td><td>{{c.login}}</td><td>{{c.direct}}</td><td>{{c.str_nmb}}</td><td>{{c.descr}}</td>
+        <td>{{c.pval}}</td><td>{{c.dimen}}</td><td>{{c.dateon}}</td><td>{{c.status}}</td>
+     </tr>
+    </table>
+  </div>
+</div>
+</div>

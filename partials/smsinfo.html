@@ -1,0 +1,91 @@
+<nav ng-if = "role == '0'" class="navbar navbar-fixed-top" style="background-color: #DEECFA;">
+<div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#reports"><strong>PUZZLE</strong></a>
+  </div>
+  <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#reports"><strong>Отчеты</strong></a></li>
+        <li><a href="#archlst"><strong>Архив</strong></a></li>
+        <li><a href="#instruction"><strong>О программе "Puzzle"</strong><span class="glyphicon glyphicon-book">&nbsp;</span></a></li>
+      </ul>
+   </div>
+</div>
+</nav>
+<br /><br /><br />
+<h4>Просмотр и добавление информации для организации SMS-опросов</h4>
+<div class="row">
+<div class="col-md-12">
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+           Добавление ежедневной информации в таблицу SMSINFO
+      </div>
+      <div class="panel-body">
+        <div>
+            <input name="userfile" type="file" file-model="myFile" ng-disabled="progress == 1"/>
+            <br />
+            <button class="btn btn-success" ng-click="uploadFile()" ng-disabled="progress == 1">Передать файл для загрузки в БД</button>
+            <div ng-hide="progress == 0"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</div>
+        </div>
+      </div>
+  </div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">Просмотр таблицы SMSINFO
+       <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Фильтр: <span class="input-icon">
+                        <input placeholder="Фильтр ..." class="nav-search-input" ng-model="filterReport" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+            </div>
+        </div>
+  </div>
+   <div class="panel-body">
+   <h4>Строк: {{filteredReports.length}}</h4>
+   <div class="table-responsive">
+    <table class="table table-condensed table-hover table-bordered">
+    <tr ng-show="reports.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="reports.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+            <tr>
+            <th><small>ID</small></th>
+            <th><small>№ обращ.</small></th>
+            <th><small>Телефон</small></th>
+            <th><small>УПФР</small></th>
+            <th><small>ID УПФР</small></th>
+            <th><small>Услуга</small></th>
+            <th><small>ID услуги</small></th>
+            <th><small>Процедура</small></th>
+            <th><small>ID проц.</small></th>
+            <th><small>Дата услуги</small></th>
+            <th><small>Файл</small></th>
+            <th><small>Внесено</small></th>
+            </tr>
+            <tbody>
+                <tr ng-repeat="c in filteredReports = (reports | filter:filterReport)">
+                    <td><small>{{c.id}}</small></td>
+                    <td><small>{{c.nom_obr}}</small></td>
+                    <td><small>{{c.phone}}</small></td>
+                    <td><small>{{c.name_upfr}}</small></td>
+                    <td><small>{{c.id_ter_org}}</small></td>
+                    <td><small>{{c.name_uslugi}}</small></td>
+                    <td><small>{{c.id_frgu}}</small></td>
+                    <td><small>{{c.name_proc}}</small></td>
+                    <td><small>{{c.id_proc}}</small></td>
+                    <td><small>{{c.date_uslugi}}</small></td>
+                    <td><small>{{c.xls_file}}</small></td>
+                    <td><small>{{c.created}}</small></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+ </div>
+</div>
+</div>

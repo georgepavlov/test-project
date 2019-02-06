@@ -1,0 +1,52 @@
+<br /><br /><br />
+<h4>Создание строк отчета для исполнителей.</h4>
+<div class="row">
+<br />
+<div class="col-md-12">
+
+<div class="panel panel-primary">
+      <div class="panel-heading">Наименование отчета: {{report[0].name_rep}}.
+      &nbsp;Идентификатор отчета: {{rep_id}}
+      </div>
+<div class="panel-body">
+    <form>
+<div ng-controller="DatepickerCtrl1">
+<div class="col-md-6">
+<label for="dateon">Данные отчета корректны на дату</label>
+                    <p class="input-group">
+                    <input type="text" name="dateon" id="dateon" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="myForm.dt1" is-open="opened"
+                    min-date="minDate" max-date="'2018-12-31'" current-text="Сегодня" clear-text="Очистить" close-text="Закрыть"
+                    datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    </p>
+</div>
+</div>
+<div ng-controller="DatepickerCtrl2">
+<div class="col-md-6">
+<label for="dateisp">Данные отчета ввести до</label>
+                    <p class="input-group">
+                    <input type="text" name="dateisp" id="dateisp" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="myForm.dt2" is-open="opened"
+                    min-date="minDate" max-date="'2018-12-31'" current-text="Сегодня" clear-text="Очистить" close-text="Закрыть"
+                    datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    </p>
+</div>
+</div>
+<div class="col-md-12">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="send_all" ng-model="myForm.send_all" /> Отправлять по электронной почте уведомления исполнителям
+    </label>
+  </div>
+      <hr />
+         <button class="btn btn-success" ng-click="myForm.submitTheForm()" ng-disabled="enableBtn==0">Создать строки отчета</button>
+</div>
+    </form>
+  </div>
+</div>
+</div>
+</div>

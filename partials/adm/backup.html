@@ -1,0 +1,72 @@
+<br /><br /><br />
+<h4>Информация о базе данных и сохранение базы данных</h4>
+<div class="row">
+<div class="col-md-12">
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+           Сохранение базы данных
+      </div>
+      <div class="panel-body">
+      <h4>Есть резервные копии</h4>
+   <div class="table-responsive">
+    <table class="table table-condensed table-hover table-bordered">
+    <tr ng-show="files.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="files.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+            <tr>
+            <th><small>№</small></th>
+            <th><small>Имя файла</small></th>
+            <th><small>Размер, байт</small></th>
+            <th><small>Дата создания</small></th>
+            </tr>
+            <tbody>
+                <tr ng-repeat="c in files">
+                    <td><small>{{c.nmb}}</small></td>
+                    <td><small>{{c.name_file}}</small></td>
+                    <td><small>{{c.len_file}}</small></td>
+                    <td><small>{{c.fcdate}}</small></td>
+                </tr>
+            </tbody>
+            </table>
+      </div>
+      <form>
+           <span class="checkbox pull-right">
+                   <label><input type="checkbox" ng_model="send_ftp" />Отправить на ftp-сервер</label>
+           </span>
+         <button class="btn btn-success" ng-click="myForm.submitTheForm()" ng-disabled="enableBtn==0">Сохранить БД</button>
+      </form>
+  </div>
+  </div>
+<div class="panel panel-primary">
+  <div class="panel-heading">Информация о базе данных
+  </div>
+   <div class="panel-body">
+   <div class="table-responsive">
+    <table class="table table-condensed table-hover table-bordered">
+    <tr ng-show="tables.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="tables.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+            <tr>
+            <th><small>№ </small></th>
+            <th><small>Таблица</small></th>
+            <th><small>Строк</small></th>
+            <th><small>Данные, байт</small></th>
+            <th><small>Индекс, байт</small></th>
+            <th><small>Размер, КБ</small></th>
+            <th><small>Дата обновления</small></th>
+            </tr>
+            <tbody>
+                <tr ng-repeat="t in tables">
+                    <td>{{$index + 1}}</td>
+                    <td><small>{{t.table_name}}</small></td>
+                    <td><small>{{t.table_rows}}</small></td>
+                    <td><small>{{t.data_length}}</small></td>
+                    <td><small>{{t.index_length}}</small></td>
+                    <td><small>{{t.table_size}}</small></td>
+                    <td><small>{{t.update_time}}</small></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+ </div>
+</div>
+</div>

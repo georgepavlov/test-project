@@ -1,0 +1,102 @@
+<br /><br /><br />
+<h4>Настройка импорта файла МФС, код УПФР - номер строки</h4>
+<div class="row">
+<div class="col-md-12">
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+           Загрузка информации из файла МФС для связи "код УПФР - номер строки файла МФЦ"
+      </div>
+      <div class="panel-body">
+        <div>
+            <input name="userfile" type="file" file-model="myFile" ng-disabled="progress == 1"/>
+            <br />
+            <button class="btn btn-success" ng-click="uploadFile()" ng-disabled="progress == 1">Передать файл для загрузки в БД</button>
+            <div ng-hide="progress == 0"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</div>
+        </div>
+      </div>
+  </div>
+<div class="panel panel-primary">
+  <div class="panel-heading">Просмотр таблицы MFCNAMADR
+       <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Фильтр: <span class="input-icon">
+                        <input placeholder="Фильтр ..." class="nav-search-input" ng-model="filterReport" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+            </div>
+        </div>
+  </div>
+   <div class="panel-body">
+   <strong>Строк: {{filteredReports.length}}</strong>
+   <div class="pull-right">
+     <p ng-if="filteredReports.length > 0 && filteredReports.length != reports.length">
+
+
+    <select ng-model="yourSelect"
+        ng-options="obj.brief for obj in items"
+    ></select>
+     <input type="hidden" name="yourSelect" value="{{yourSelect}}" />
+
+
+
+     <button class="btn btn-primary btn-sm" ng-click="setDptcod(yourSelect.dptcod)" ng-disabled="progress == 1">Присвоить код УПФР</button>
+
+  <span ng-controller="ModalSetDptcodCtrl">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Выбрать код УПФР и для него строки отчета</h3>
+        </div>
+        <div class="modal-body">
+            <select ng-model="yourSelect" ng-options="obj.brief for obj in dptcls"></select>
+            <input type="hidden" name="yourSelect" value="{{yourSelect}}" />
+
+            <ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item.delrow">{{ item.delrow }}</a>
+                </li>
+            </ul>
+            Выбран: <b>{{ selected.item }}</b>
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Сохранить</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Отмена</button>
+        </div>
+    </script>
+  <button class="btn btn-warning btn-sm" ng-click="open_setDptcod()" ng-disabled="progress == 1">Присвоить код УПФР</button>
+
+  <button class="btn btn-warning btn-sm" ng-click="open_delRow()" ng-disabled="progress == 1">Удалить ряд</button>
+  </span>
+
+
+     </p>
+   </div>
+   <div class="table-responsive">
+    <table class="table table-condensed table-hover table-bordered">
+    <tr ng-show="reports.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="reports.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+            <tr>
+            <th><small>ID</small></th>
+            <th><small>Код УПФР</small></th>
+            <th><small>Номер строки</small></th>
+            <th><small>Наименование МФЦ</small></th>
+            <th><small>Адрес МФЦ</small></th>
+            <th><small>Внесено</small></th>
+            </tr>
+            <tbody>
+                <tr ng-repeat="c in filteredReports = (reports | filter:filterReport)">
+                    <td><small>{{c.id}}</small></td>
+                    <td><small>{{c.dptcod}}</small></td>
+                    <td><small>{{c.rownmb}}</small></td>
+                    <td><small>{{c.name}}</small></td>
+                    <td><small>{{c.address}}</small></td>
+                    <td><small>{{c.created}}</small></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+ </div>
+</div>
+</div>

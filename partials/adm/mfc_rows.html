@@ -1,0 +1,77 @@
+<br /><br /><br />
+<h4>Настройка импорта файла МФС, код УПФР - номер строки</h4>
+<div class="row">
+<div class="col-md-12">
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+           Загрузка информации из файла МФС для связи "код УПФР - номер строки файла МФЦ"
+      </div>
+      <div class="panel-body">
+        <div>
+            <input name="userfile" type="file" file-model="myFile" ng-disabled="progress == 1"/>
+            <span class="checkbox pull-right">
+                   <label><input type="checkbox" ng_model="clear_table" />Очистить связи "код УПФР - номер строки"</label>
+            </span>
+            <br />
+            <button class="btn btn-success" ng-click="uploadFile()" ng-disabled="progress == 1">Загрузка в БД</button>
+            <div ng-hide="progress == 0"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</div>
+        </div>
+      </div>
+  </div>
+<div class="panel panel-primary">
+  <div class="panel-heading">Установка связи между номером строки xls-файла МФЦ и кодом УПФР
+       <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Фильтр: <span class="input-icon">
+                        <input placeholder="Фильтр ..." class="nav-search-input" ng-model="filterReport" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+            </div>
+        </div>
+  </div>
+   <div class="panel-body">
+   <strong>Строк: {{filteredReports.length}}</strong>
+   <div class="pull-right">
+     <p ng-if="filteredReports.length > 0 && filteredReports.length != reports.length">
+     <span popover-placement="bottom" popover="Копировать в поле фильтра строку, выбранную в выпадающем списке УПФР"  popover-trigger="mouseenter">
+     <button class="btn btn-success btn-sm" ng-click="setFilter(yourSelect.brief)" ng-disabled="progress == 1">Копировать в фильтр</button>
+     </span>
+    <select ng-model="yourSelect"
+        ng-options="obj.brief for obj in dptcls"
+    ></select>
+     <input type="hidden" name="yourSelect" value="{{yourSelect}}" />
+     <span popover-placement="bottom" popover="Внимание! Отмеченным строкам будет установлен код УПФР, соответствующий наименованию района, выбранного из выпадающего списка!"  popover-trigger="mouseenter">
+     <button class="btn btn-warning btn-sm" ng-click="setDptcod(yourSelect.dptcod)" ng-disabled="progress == 1">Присвоить код УПФР</button>
+     </span>
+     </p>
+   </div>
+   <div class="table-responsive">
+    <table class="table table-condensed table-hover table-bordered">
+    <tr ng-show="reports.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="reports.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+            <tr>
+            <th>&nbsp;</th>
+            <th><small>ID</small></th>
+            <th><small>Код УПФР</small></th>
+            <th><small>Номер строки</small></th>
+            <th><small>Наименование МФЦ</small></th>
+            <th><small>Адрес МФЦ</small></th>
+            <th><small>Внесено</small></th>
+            </tr>
+            <tbody>
+                <tr ng-repeat="c in filteredReports = (reports | filter:filterReport)">
+                    <td><input type="checkbox" ng-checked="checkedRows.indexOf(c.rownmb) != -1" ng-click="toggleCheck(c.rownmb)"></td>
+                    <td><small>{{c.id}}</small></td>
+                    <td ng-class = "c.dptcod == '?' ? 'text-center danger' : ''"><small>{{c.dptcod}}</small></td>
+                    <td><small>{{c.rownmb}}</small></td>
+                    <td><small>{{c.name}}</small></td>
+                    <td><small>{{c.address}}</small></td>
+                    <td><small>{{c.created}}</small></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+ </div>
+</div>
+</div>

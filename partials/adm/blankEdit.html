@@ -1,0 +1,64 @@
+    <button type="button" class="close" ng-click="cancel();">
+        <i class="fa fa-times-circle-o" style="margin:10px;color:blue;"></i>
+    </button>
+    <div class="modal-header">
+        <h4 class="modal-title">Редактируем строку [ID: {{blank.id}}]</h4>
+    </div>
+    <div class="modal-body">
+        <form name="report_form" class="form-horizontal" role="form" novalidate>
+            <form-element label="ID-отчета" mod="blank">
+                <input type="text" class="form-control" name="name_rep" placeholder="Отчет" ng-model="blank.id_rep" ng-disabled="blank.id_rep" />
+            </form-element>
+            <form-element label="Направление" mod="blank">
+                <select name="direct" ng-model="myForm.dir"
+                        ng-options="obj.direct for obj in dir" class="form-control">
+                </select>
+            </form-element>
+            <form-element label="Строка" mod="blank">
+                <input type="text" class="form-control" name="str_nmb" placeholder="Строка" ng-model="blank.str_nmb" />
+            </form-element>
+            <form-element label="Наименование показателя" mod="blank">
+                <textarea class="form-control" name="descr" placeholder="Наименование" ng-model="blank.descr">{{blank.descr}}</textarea>
+            </form-element>
+           <form-element mod="blank">
+              <label>
+                 <input type="radio" ng-model="blank.type_val" value="A">
+                 Любой текст
+              </label>
+              <label>
+                 <input type="radio" ng-model="blank.type_val" value="N">
+                 Только число
+              </label>
+           </form-element>
+           <!--
+            <form-element label="Запрос" mod="blank">
+                <input type="text" name="rqref" class="form-control" placeholder="Имя скрипта" ng-model="blank.rqref" />
+            </form-element>
+            <form-element mod="blank">
+                <input type="checkbox" name="enable_ins" ng-model="blank.enable_ins" /> Разрешить вставку строк
+            </form-element>
+            -->
+            <form-element label="Величина" mod="blank">
+                <input type="text" name="pval" class="form-control" placeholder="Величина" ng-model="blank.pval" />
+              </form-element>
+            <form-element label="Единица измерения" mod="blank">
+                <input type="text" name="dimen" class="form-control" placeholder="Ед.изм." ng-model="blank.dimen" />
+            </form-element>
+            <div class="space"></div>
+            <div class="space-4"></div>
+            <div class="modal-footer">
+                <form-element label="">
+                    <div class="text-right">
+                        <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Отмена</a>
+                        <button ng-click="saveBlank(blank);"
+                                ng-disabled="enableBtn==0"
+                                class="btn btn-sm btn-primary"
+                                type="submit">
+                            <i class="ace-icon fa fa-check"></i>{{buttonText}}
+                        </button>
+                    </div>
+                </form-element>
+            </div>
+        </form>
+    </div>
+

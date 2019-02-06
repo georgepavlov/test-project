@@ -1,0 +1,25 @@
+<br /><br /><br />
+<h4>Подписка Организаторов на отчеты.</h4>
+<div class="row">
+<br />
+<div class="col-md-12">
+ <div class="panel panel-primary">
+      <div class="panel-heading">Пользователь:
+      Роль = {{users[0].role}}, Login = {{users[0].login}}, ФИО(Наименование) = {{users[0].fio}}
+      </div>
+   <div class="panel-body">
+    <div ng-show="users.length==0"><span style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</span></div>
+    <div ng-hide="users.length>-1"><span style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</span></div>
+    <form>
+        <label for="uidrep">Пользователь[{{users[0].uid}}]-отчеты</label>
+          <select id="uidrep" multiple="true" ng-model="myForm.report"
+                ng-options="obj.id_rep as obj.name_rep for obj in myForm.reports" class="form-control" size="10">
+          </select>
+   Выбраны отчеты:{{myForm.report}}
+   <hr />
+         <button class="btn btn-success" ng-click="myForm.submitTheForm()">Сохранить в БД</button>
+    </form>
+  </div>
+ </div>
+</div>
+</div>

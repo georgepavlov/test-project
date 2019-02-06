@@ -1,0 +1,158 @@
+<br/><br/><br/>
+<h4>Импорт файла УПФР - "ВЫДАЧА"</h4>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Ввод информации от УПФР в буфер для отчета о количестве госуслуг (ВЫДАЧА документов)
+            </div>
+            <div class="panel-body">
+                <div>
+                    <input name="userfile" type="file" file-model="myFile"/>
+                    <br/>
+                    <button class="btn btn-success" ng-click="uploadFile()" ng-disabled="progress == 1">Передать
+                        XLS-файл для загрузки в буфер
+                    </button>
+                    <div ng-hide="progress == 0"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">Содержимое буфера
+            </div>
+            <div class="panel-body">
+                <h4>Строк: {{reports.length}}</h4>
+
+                <div class="table-responsive">
+                    <table class="table table-condensed table-hover table-bordered">
+                        <tr ng-show="reports.length==0">
+                            <td style="vertical-align:middle;" colspan=20><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены
+                            </td>
+                        </tr>
+                        <tr ng-hide="reports.length>-1">
+                            <td style="vertical-align:middle;" colspan=20><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center vert-align" rowspan="2">ID</th>
+                            <th class="text-center vert-align" rowspan="2">Код УПФР</th>
+                            <th class="text-center" colspan="17">Номер госуслуги (МФЦ)</th>
+                            <th class="text-center vert-align" rowspan="2">Загружено</th>
+                        </tr>
+                        <tr>
+                            <th ng-repeat="b in names" class="text-center success active"><span
+                                    popover-placement="right" popover={{b.nameserv}} popover-trigger="mouseenter">{{b.servnmb}}</span>
+                            </th>
+                        </tr>
+                        <tbody>
+                        <tr ng-repeat="c in reports">
+                            <td class="text-center">
+                                <small>{{c.id}}</small>
+                            </td>
+                            <td class="text-center success active"><strong><span popover-placement="right"
+                                                                                 popover={{c.name}}
+                                                                                 popover-trigger="mouseenter"><small>
+                                {{c.dptcod}}
+                            </small></span></strong></td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[0].servnmb}}-МФЦ,1-ПФР)&nbsp;{{names[0].nameserv}} popover-trigger="click">
+                                <small>{{c.serv1}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[1].servnmb}}-МФЦ,2-ПФР)&nbsp;{{names[1].nameserv}} popover-trigger="click">
+                                <small>{{c.serv2}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[2].servnmb}}-МФЦ,3-ПФР)&nbsp;{{names[2].nameserv}} popover-trigger="click">
+                                <small>{{c.serv3}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[3].servnmb}}-МФЦ,4-ПФР)&nbsp;{{names[3].nameserv}} popover-trigger="click">
+                                <small>{{c.serv4}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[4].servnmb}}-МФЦ,5-ПФР)&nbsp;{{names[4].nameserv}} popover-trigger="click">
+                                <small>{{c.serv5}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=(({{names[5].servnmb}}-МФЦ,6-ПФР)&nbsp;{{names[5].nameserv}} popover-trigger="click">
+                                <small>{{c.serv6}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[6].servnmb}}-МФЦ,7-ПФР)&nbsp;{{names[6].nameserv}} popover-trigger="click">
+                                <small>{{c.serv7}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[7].servnmb}}-МФЦ,8-ПФР)&nbsp;{{names[7].nameserv}} popover-trigger="click">
+                                <small>{{c.serv8}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[8].servnmb}}-МФЦ,9-ПФР)&nbsp;{{names[8].nameserv}} popover-trigger="click">
+                                <small>{{c.serv9}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[9].servnmb}}-МФЦ,10-ПФР)&nbsp;{{names[9].nameserv}} popover-trigger="click">
+                                <small>{{c.serv10}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[10].servnmb}}-МФЦ,11-ПФР)&nbsp;{{names[10].nameserv}} popover-trigger="click">
+                                <small>{{c.serv11}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[11].servnmb}}-МФЦ,12-ПФР)&nbsp;{{names[11].nameserv}} popover-trigger="click">
+                                <small>{{c.serv12}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[12].servnmb}}-МФЦ,13-ПФР)&nbsp;{{names[12].nameserv}} popover-trigger="click">
+                                <small>{{c.serv13}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[13].servnmb}}-МФЦ,14-ПФР)&nbsp;{{names[13].nameserv}} popover-trigger="click">
+                                <small>{{c.serv14}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[14].servnmb}}-МФЦ,15-ПФР)&nbsp;{{names[14].nameserv}} popover-trigger="click">
+                                <small>{{c.serv15}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[15].servnmb}}-МФЦ,16-ПФР)&nbsp;{{names[15].nameserv}} popover-trigger="click">
+                                <small>{{c.serv16}}</small></span>
+                            </td>
+                            <td class="text-center"><span popover-title={{c.name}} popover=({{names[16].servnmb}}-МФЦ,17-ПФР)&nbsp;{{names[16].nameserv}} popover-trigger="click">
+                                <small>{{c.serv17}}</small></span>
+                            </td>
+                            <td class="text-center">
+                                <small>{{c.created}}</small>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">Список госуслуг
+            </div>
+            <div class="panel-body">
+                <h4>Строк: {{names.length}}</h4>
+
+                <div class="table-responsive">
+                    <table class="table table-condensed table-hover table-bordered">
+                        <tr ng-show="names.length==0">
+                            <td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены
+                            </td>
+                        </tr>
+                        <tr ng-hide="names.length>-1">
+                            <td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center">Номер наш</th>
+                            <th class="text-center">Номер МФЦ</th>
+                            <th class="text-center">Наименование</th>
+                        </tr>
+                        <tbody>
+                        <tr ng-repeat="c in names">
+                            <td class="text-center">
+                                <small>{{$index + 1}}</small>
+                            </td>
+                            <td class="text-center">
+                                <small>{{c.servnmb}}</small>
+                            </td>
+                            <td class="text-left">
+                                <small>{{c.nameserv}}</small>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

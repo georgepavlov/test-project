@@ -1,0 +1,58 @@
+<nav ng-if = "role == '0'" class="navbar navbar-fixed-top" style="background-color: #DEECFA;">
+<div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#reports"><strong>PUZZLE</strong></a>
+  </div>
+  <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#reports"><strong>Отчеты</strong></a></li>
+        <li><a href="#smsinfo"><strong>Для SMS-опроса</strong></a></li>
+        <li><a href="#archlst"><strong>Архив</strong></a></li>
+        <li><a href="#instruction"><strong>О программе "Puzzle"</strong><span class="glyphicon glyphicon-book">&nbsp;</span></a></li>
+      </ul>
+   </div>
+</div>
+</nav>
+<br /><br /><br />
+<h4>{{report.name_rep}}</h4>
+<div class="row">
+<div class="col-md-12">
+<div class="panel panel-primary">
+      <div class="panel-heading">Строки отчета
+       <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Фильтр: <span class="input-icon">
+                        <input placeholder="Фильтр ..." class="nav-search-input" ng-model="filterArchive" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+            </div>
+        </div>
+   </div>
+  <div class="panel-body">
+  <h4>Строк: {{filteredArchives.length}}</h4>
+  <div class="table-responsive">
+    <table class="table table-striped">
+    <tr ng-show="archives.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="archives.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+     <tr><th><a href="" ng-click="reverse=!reverse;order('id',reverse)">ID</a></th>
+         <th>Пользователь</th>
+         <th><a href="" ng-click="reverse=!reverse;order('direct',reverse)">Направление</a></th>
+         <th><a href="" ng-click="reverse=!reverse;order('str_nmb',reverse)">Строка</a></th>
+         <th>Описание</th><th>Величина</th><th>Ед. изм.</th><th>На дату</th>
+     </tr>
+     <tr ng-repeat="c in filteredArchives =(archives | filter:filterArchive)">
+        <td>{{c.id}}</td><td>{{c.login}}</td><td>{{c.direct}}</td><td>{{c.str_nmb}}</td><td>{{c.descr}}</td>
+        <td>{{c.pval}}</td><td>{{c.dimen}}</td><td>{{c.dateon}}</td>
+     </tr>
+    </table>
+  </div>
+</div>
+</div>
+</div>
+</div>

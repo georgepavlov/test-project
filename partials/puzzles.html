@@ -1,0 +1,90 @@
+<nav ng-if = "role == '0'" class="navbar navbar-fixed-top" style="background-color: #DEECFA;">
+<div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#reports"><strong>PUZZLE</strong></a>
+  </div>
+  <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#reports"><strong>Отчеты</strong></a></li>
+        <li><a href="#smsinfo"><strong>SMS-опрос</strong></a></li>
+        <li><a href="#archlst"><strong>Архив</strong></a></li>
+        <li><a href="#instruction"><strong>О программе "Puzzle"</strong><span class="glyphicon glyphicon-book">&nbsp;</span></a></li>
+      </ul>
+   </div>
+</div>
+</nav>
+<br /><br /><br />
+<h4>{{report[0].name_rep}}</h4>
+<div ng-if="role=='2'">
+<button type="button" class="btn btn-danger fa fa-plus" ng-click="open(puzzle);">&nbsp;Добавить строку</button>
+</div>
+
+<div class="panel panel-primary">
+      <div class="panel-heading">Список строк отчета
+       <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Фильтр: <span class="input-icon">
+                        <input placeholder="Фильтр ..." class="nav-search-input" ng-model="filterPuzzle" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+            </div>
+        </div>
+   </div>
+  <div class="panel-body">
+  <strong>Строк: {{filteredPuzzles.length}}</strong>
+  <div class="pull-right">
+  <p ng-if="role=='0' && report[0].enable_ins=='1'"><button class="btn btn-primary btn-sm" ng-click="addRow(rep_id)" ng-disabled="progress == 1">Добавить ряд</button>
+  <span ng-controller="ModalDelCtrl" ng_show = "report[0].cnt_row > 1">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Выбрать ряд для удаления</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item.delrow">{{ item.delrow }}</a>
+                </li>
+            </ul>
+            Выбран: <b>{{ selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Удалить</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Отмена</button>
+        </div>
+    </script>
+  <button class="btn btn-warning btn-sm" ng-click="open_delRow()" ng-disabled="progress == 1">Удалить ряд</button>
+  </span>
+  </p>
+  </div>
+  <div class="table-responsive">
+   <table class="table table-striped">
+    <tr ng-show="puzzles.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="puzzles.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+    <tr><th><a href="" ng-click="reverse=!reverse;order('id',reverse)">ID</a></th>
+         <th>Пользователь</th>
+         <th><a href="" ng-click="reverse=!reverse;order('direct',reverse)">Направление</a></th>
+         <th><a href="" ng-click="reverse=!reverse;order('str_nmb',reverse)">Строка</a></th>
+         <th>Описание</th><th>Величина</th><th>Ед. изм.</th><th>На дату</th><th>Ввод</th><th>Статус</th>
+    </tr>
+    <tr ng-repeat="c in filteredPuzzles = (puzzles | filter:filterPuzzle)" animate-on-change='c.descr+c.pval+c.dimen+c.direct+c.status' ng-animate=" 'animate'">
+        <td>{{c.id}}</td><td>{{c.login}}</td><td>{{c.direct}}</td><td>{{c.str_nmb}}</td><td>{{c.descr}}</td><td>{{c.pval}}</td><td>{{c.dimen}}</td>
+        <td>{{c.dateon}}</td>
+           <td style="width:60px">
+            <div class="btn-group">
+              <button type="button" class="btn btn-success fa fa-edit" ng-click="open(c)" ng-disabled="c.status != 'ВВОД'"></button>
+            </div>
+           </td>
+        <td>
+            <button class="btn" ng-class="{'ВВОД':'btn btn-warning btn-sm','ПРОЦ':'btn btn-primary btn-sm','ЗВРШ':'btn btn-success btn-sm'}[c.status]" ng-click="changePuzzleStatus(c)">{{c.status}}</button>
+        </td>
+    </tr>
+   </table>
+  </div>
+</div>
+</div>

@@ -1,0 +1,32 @@
+<br /><br /><br />
+<h4>Сводный отчет по 11 госуслугам, оказанным в УПФР и МФЦ.</h4>
+<div class="row">
+<br />
+<div class="col-md-12">
+ <div class="panel panel-primary">
+      <div class="panel-heading">Укажите отчеты для включения в свод</div>
+   <div class="panel-body">
+    <div ng-show="myForm.reports.length==0"><span style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</span></div>
+    <div ng-hide="myForm.reports.length>-1"><span style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</span></div>
+    <form>
+        <label for="uidrep">В архиве есть отчеты</label>
+          <select id="uidrep" multiple="true" ng-model="myForm.report" ng-disabled="make_svod.length > 0"
+                ng-options="obj.id_arch as obj.name_rep for obj in myForm.reports" class="form-control" size="10">
+          </select>
+   Выбраны отчеты:{{myForm.report}}
+   <hr />
+       <div ng-show="myForm.reports.length > 0 && make_svod.length == 0">
+         <button class="btn btn-success" ng-click="myForm.submitTheForm()" ng-disabled="progress == 1">Обработать</button>
+       </div>
+               <button ng-show="make_svod.length > 0" class="btn btn-warning" ng-click="myForm.clrfrm()" ><span class="glyphicon glyphicon-refresh"></span></button>
+               <a ng-show="make_svod.length > 0" class="btn btn-success pull-right"  role="button"
+                          href="out_xls/make_svod2.php" target="_blank">Получить сводный отчет</a>
+               <div ng-hide="progress == 0">
+                    <span><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Обработка данных...
+                    </span>
+               </div>
+    </form>
+  </div>
+ </div>
+</div>
+</div>

@@ -1,0 +1,31 @@
+<br /><br /><br />
+<h4>Подписка "Организаторов" на отчеты</h4>
+<hr/>
+
+<div class="panel panel-primary">
+      <div class="panel-heading">Пользователи - Организаторы
+       <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Фильтр: <span class="input-icon">
+                        <input placeholder="Фильтр ..." class="nav-search-input" ng-model="filterUser" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                            </span>
+            </div>
+        </div>
+      </div>
+  <div class="panel-body">
+  <h4>Строк: {{filteredUsers.length}}</h4>
+  <div class="table-responsive">
+    <table class="table table-striped">
+    <tr ng-show="users.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="users.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+    <tr><th ng-repeat="c in columns">{{c.text}}</th></tr>
+    <tr ng-repeat="c in filteredUsers = (users | filter:filterUser | orderBy:'-uid')" uid="{{c.uid}}">
+        <td><small>{{c.uid}}</small></td><td><small>{{c.login}}</small></td><td><small>{{c.role}}</small></td>
+        <td><a href="#managers/{{c.uid}}">{{c.fio}}</a></td>
+        <td><small>{{c.email}}</small></td><td><small>{{c.phone}}</small></td>
+     </tr>
+    </table>
+  </div>
+</div>
+</div>

@@ -1,0 +1,69 @@
+<nav class="navbar navbar-fixed-top" style="background-color: #DEECFA;">
+<div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#reports"><strong>PUZZLE</strong></a>
+  </div>
+  <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#smsinfo"><strong>SMS-опрос</strong></a></li>
+        <li><a href="#archlst"><strong>Архив</strong></a></li>
+        <li><a href="#instruction"><strong>О программе "Puzzle"</strong><span class="glyphicon glyphicon-book">&nbsp;</span></a></li>
+      </ul>
+   </div>
+</div>
+</nav>
+<br /><br /><br />
+<h4>Отчеты</h4>
+<div class="panel panel-primary">
+  <div class="panel-heading">Список отчетов
+  </div>
+   <div class="panel-body">
+   <h4>Строк: {{reports.length}}</h4>
+    <table class="table table-condensed table-hover table-bordered">
+    <tr ng-show="reports.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="reports.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+            <tr>
+            <th>№&nbsp;</th>
+            <th>ID</th>
+            <th>Наименование</th>
+            <th>Комментарии</th>
+            <th>Данные на дату</th>
+            <th>Срок исполнения</th>
+            <th>Действия</th>
+            </tr>
+            <tbody>
+                <tr ng-repeat="c in reports">
+                    <td>{{$index + 1}}</td>
+                    <td>{{c.id_rep}}</td>
+                    <td>{{c.name_rep}}</td>
+                    <td>{{c.comment}}</td>
+                    <td ng-if="c.dateon != '0000-00-00'">{{c.dateon}}</td>
+                    <td ng-if="c.dateon == '0000-00-00'">&nbsp;</td>
+                    <td ng-if="c.dateisp != '0000-00-00'">{{c.dateisp}}</td>
+                    <td ng-if="c.dateisp == '0000-00-00'">&nbsp;</td>
+                    <td ng-if="c.action == '4'">
+                     <div class="btn-group">
+                       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                         Варианты <span class="caret"></span>
+                       </button>
+                       <ul class="dropdown-menu" style="right: 0; left: auto;" role="menu">
+                          <li><a href="#puzzles/{{c.id_rep}}">Ввод или редактирование данных</a></li>
+                          <li class="divider"></li>
+                          <li><a href="out/{{c.path_out}}?act=4&id_rep={{c.id_rep}}" target="_blank">
+                          Выходная форма отчета</a></li>
+                          <li><a href="out_xls/{{c.path_out}}?act=4&id_rep={{c.id_rep}}" target="_blank">
+                          Отчет в виде XLS-файла</a></li>
+                       </ul>
+                     </div>
+                    </td>
+                    <td ng-if="c.action != '4'">&nbsp;</td>
+                </tr>
+            </table>
+    </div>
+ </div>

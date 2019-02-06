@@ -1,0 +1,45 @@
+<h3>Редактирование списка пользователей</h3>
+<hr/>
+<div ng-if="role=='2'">
+<button type="button" class="btn btn-danger fa fa-plus" ng-click="open(user);">&nbsp;Добавить строку</button>
+</div>
+
+<div class="panel panel-primary">
+      <div class="panel-heading">Таблица пользователей
+       <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Фильтр: <span class="input-icon">
+                        <input placeholder="Фильтр ..." class="nav-search-input" ng-model="filterUser" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+            </div>
+        </div>
+   </div>
+  <div class="panel-body">
+  <h4>Строк: {{filteredUsers.length}}</h4>
+  <div class="table-responsive">
+    <table class="table table-striped">
+    <tr ng-show="users.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="users.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+    <!--<tr><th ng-repeat="c in columns">{{c.text}}</th></tr>-->
+    <tr><th><a href="" ng-click="reverse=!reverse;order('uid',reverse)">UID</a></th>
+    <th><a href="" ng-click="reverse=!reverse;order('login',reverse)">Login</a></th>
+    <th>Роль</th><th>Хэш пароля</th>
+    <th><a href="" ng-click="reverse=!reverse;order('fio',reverse)">Имя</a></th>
+    <th>E-mail</th><th>Телефон</th><th>Изменить</th>
+    </tr>
+    <tr ng-repeat="c in filteredUsers = (users | filter:filterUser)" animate-on-change='c.uid+c.fio+c.login+c.password+c.email+c.role+c.phone' ng-animate=" 'animate'">
+        <td><small>{{c.uid}}</small></td><td><small>{{c.login}}</small></td><td><small>{{c.role}}</small></td><td><small>{{c.password}}</small></td>
+        <td><small>{{c.fio}}</small></td><td><small>{{c.email}}</small></td><td><small>{{c.phone}}</small></td>
+           <td ng-if="c.login != 'root'" style="width:100px">
+            <div class="btn-group">
+              <button type="button" class="btn btn-success fa fa-edit" ng-click="open(c);"></button>
+              <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="deleteUser(c);" ng-disabled="role=='0'"></button>
+            </div>
+           </td>
+           <td ng-if="c.login == 'root'">&nbsp;</td>
+     </tr>
+    </table>
+  </div>
+</div>
+</div>

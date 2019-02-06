@@ -1,0 +1,52 @@
+    <button type="button" class="close" ng-click="cancel();">
+        <i class="fa fa-times-circle-o" style="margin:10px;color:blue;"></i>
+    </button>
+    <div class="modal-header">
+        <h3 class="modal-title">Редактируем строку [ID: {{puzzle.id}}]</h3>
+    </div>
+    <div class="modal-body">
+        <form name="puzzle_form" class="form-horizontal" role="form" novalidate>
+            <form-element label="Пользователь" mod="puzzle">
+                <input type="text" class="form-control" name="login" placeholder="Пользователь" ng-model="puzzle.login" ng-disabled="puzzle.id" />
+            </form-element>
+            <form-element label="Строка" mod="puzzle">
+                <input type="text" name="str_nmb" class="form-control" placeholder="Номер строки" ng-model="puzzle.str_nmb" ng-disabled="role != '2'" />
+            </form-element>
+
+            <form-element label="Показатель" mod="puzzle">
+            <textarea class="form-control" name="descr" placeholder="Описание" ng-model="puzzle.descr" ng-disabled="role != '2'">{{puzzle.descr}}</textarea>
+            </form-element>
+
+            <form-element label="Величина" mod="puzzle">
+                <input ng-if = "puzzle.type_val=='N'" type="text" name="pval" class="form-control" placeholder="Введите величину" ng-model="puzzle.pval" required only-numbers focus-me="true"/>
+                <textarea ng-if ="puzzle.type_val=='A'" class="form-control" name="pval"  placeholder="Введите величину" ng-model="puzzle.pval" required focus-me="true">{{puzzle.pval}}</textarea>
+               <!-- <small class="errorMessage" ng-show="puzzle_form.pval.$dirty && puzzle_form.pval.$invalid"> Вводите только числа!</small> -->
+            </form-element>
+
+           <form-element label="Ед.изм." mod="puzzle">
+                <input type="text" name="dimen" class="form-control" placeholder="Ед. изм." ng-model="puzzle.dimen" ng-disabled="role != '2'" />
+           </form-element>
+
+            <form-element label="Направление" mod="puzzle">
+                <input type="text" name="direct" class="form-control" placeholder="Направление" ng-model="puzzle.direct" ng-disabled="role != '2'"/>
+                <small class="errorMessage" ng-show="puzzle_form.direct.$dirty && puzzle_form.direct.$invalid"> Enter the Direct.</small>
+            </form-element>
+
+            <div class="space"></div>
+            <div class="space-4"></div>
+            <div class="modal-footer">
+                <form-element label="">
+                    <div class="text-right">
+                        <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Отмена</a>
+                        <button ng-click="savePuzzle(puzzle);"
+                                ng-disabled="puzzle_form.$invalid || enableUpdate"
+                                class="btn btn-sm btn-primary"
+                                type="submit">
+                            <i class="ace-icon fa fa-check"></i>{{buttonText}}
+                        </button>
+                    </div>
+                </form-element>
+            </div>
+        </form>
+    </div>
+

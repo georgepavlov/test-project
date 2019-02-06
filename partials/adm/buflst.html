@@ -1,0 +1,52 @@
+<br /><br /><br />
+<h4>Информация об отчетах в буфере</h4>
+
+<div class="panel panel-primary">
+ <div class="panel-heading">Отчеты - действия
+  </div>
+   <div class="panel-body">
+   <h4>Строк: {{reports.length}}</h4>
+
+    <table class="table table-condensed table-bordered table-hover text-center">
+    <tr ng-show="reports.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="reports.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+            <thead style="color:#642383; background-color:#DAFEF3;">
+            <tr>
+            <th class="text-center vert-align" rowspan="2">№&nbsp;</th>
+            <th class="text-center vert-align" rowspan="2">ID</th>
+            <th class="text-center vert-align" rowspan="2">Наименование</th>
+            <th class="text-center" colspan="3">Статус</th>
+            <th class="text-center vert-align" rowspan="2">Действия</th>
+            </tr>
+            <tr>
+            <th>ВВОД</th>
+            <th>ПРОЦ</th>
+            <th>ЗВРШ</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in reports">
+                    <td>{{$index + 1}}</td>
+                    <td>{{c.id_rep}}</td>
+                    <td>{{c.name_rep}}</td>
+                    <td>{{c.vvod}}</td>
+                    <td>{{c.proc}}</td>
+                    <td>{{c.zvrsh}}</td>
+                    <td>
+                    <div class="btn-group">
+                       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                         Варианты <span class="caret"></span>
+                       </button>
+                       <ul class="dropdown-menu" role="menu">
+                          <li><a href="#buflst/{{c.id_rep}}">Просмотр</a></li>
+                          <li ng-if = "role == '2'"><a href="#action/2/{{c.id_rep}}">Удалить отчет</a></li>
+                       </ul>
+                     </div>
+                    </td>
+                </tr>
+            </tbody>
+     </table>
+
+   </div>
+  </div>
+

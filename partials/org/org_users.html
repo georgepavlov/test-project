@@ -1,0 +1,46 @@
+<br /><br /><br />
+<h4>Информация о источниках данных</h4>
+
+<div class="panel panel-primary">
+ <div class="panel-heading">Исполнители
+       <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Фильтр: <span class="input-icon">
+                        <input placeholder="Фильтр ..." class="nav-search-input" ng-model="filterUser" autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+            </div>
+        </div>
+  </div>
+   <div class="panel-body">
+   <h4>Строк: {{filteredUsers.length}}</h4>
+   <div class="table-responsive">
+    <table class="table table-condensed table-bordered table-hover text-center">
+    <tr ng-show="users.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;Данные не найдены</td></tr>
+    <tr ng-hide="users.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Загрузка...</td></tr>
+            <thead style="color:#642383; background-color:#DEECFA;">
+            <tr>
+            <th class="text-center">№&nbsp;</th>
+            <th class="text-center"><a href="" ng-click="reverse=!reverse;order('uid',reverse)">UID</a></th>
+            <th class="text-center"><a href="" ng-click="reverse=!reverse;order('login',reverse)">Код исполнителя</a></th>
+            <th class="text-center"><a href="" ng-click="reverse=!reverse;order('fio',reverse)">Наименование (ФИО)</a></th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Телефон</th>
+            <th class="text-center">Сообщение</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in filteredUsers = (users | filter:filterUser)">
+                    <td>{{$index + 1}}</td>
+                    <td>{{c.uid}}</td>
+                    <td class="text-left">{{c.login}}</td>
+                    <td class="text-left">{{c.fio}}</td>
+                    <td>{{c.email}}</td>
+                    <td>{{c.phone}}</td>
+                    <td><a href="#mail/{{c.uid}}">Напоминание</a></td>
+                </tr>
+            </tbody>
+     </table>
+    </div>
+   </div>
+ </div>

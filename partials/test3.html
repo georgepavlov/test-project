@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Пример обработки события BEFOREUNLOAD</title>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+<h3>Предупреждение при закрытии страницы</h3>
+
+<button id="reload">Перезагрузка</button>
+
+<script type="text/javascript">
+
+    $('#reload').click(function () {
+
+        location.reload();
+
+    });
+
+    $(window).bind('beforeunload', function () {
+        return 'Сообщение для пользователя.';
+    });
+
+</script>
+
+</body>
+</html>

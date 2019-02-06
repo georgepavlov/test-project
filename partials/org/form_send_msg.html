@@ -1,0 +1,23 @@
+<br/><br/><br/>
+<h4>Послать напоминание исполнителю.</h4>
+<div class="row">
+    <br/>
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Исполнитель: Login - {{user.login}}.
+                &nbsp;Имя - {{user.fio}}.&nbsp;Email - {{user.email}}.&nbsp;Телефон - {{user.phone}}.
+            </div>
+            <div class="panel-body">
+                <form>
+                    <label for="message">Текстовое сообщение</label>
+                    <textarea id="message" class="form-control" name="message" placeholder="Введите текст сообщения"
+                              ng-model="myForm.message">{{myForm.message}}</textarea>
+                    <hr/>
+                    <button class="btn btn-success" ng-click="myForm.submitTheForm()" ng-disabled="enableBtn==0">
+                        Отправить
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

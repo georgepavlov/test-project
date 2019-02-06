@@ -1,0 +1,47 @@
+    <button type="button" class="close" ng-click="cancel();">
+        <i class="fa fa-times-circle-o" style="margin:10px;color:blue;"></i>
+    </button>
+    <div class="modal-header">
+        <h4 class="modal-title">Редактируем строку [ID: {{report.id_rep}}]</h4>
+    </div>
+    <div class="modal-body">
+        <form name="report_form" class="form-horizontal" role="form" novalidate>
+
+            <form-element label="Отчет" mod="report">
+                <input type="text" class="form-control" name="name_rep" placeholder="Отчет" ng-model="report.name_rep" focus/>
+            </form-element>
+
+            <form-element label="Комментарии" mod="report">
+            <textarea class="form-control" name="comment" placeholder="Комментарии" ng-model="report.comment" >{{report.comment}}</textarea>
+            </form-element>
+
+            <form-element label="Скрипт" mod="report">
+                <input type="text" name="path_out" class="form-control" placeholder="Скрипт-отчет" ng-model="report.path_out" />
+              </form-element>
+
+           <form-element label="Документ" mod="report">
+                <input type="text" name="path_doc" class="form-control" placeholder="Документ" ng-model="report.path_doc" />
+              </form-element>
+
+            <form-element mod="report">
+                <input type="checkbox" name="enable_ins" ng-model="report.enable_ins" /> Разрешить вставку ряда в буфере
+            </form-element>
+
+            <div class="space"></div>
+            <div class="space-4"></div>
+            <div class="modal-footer">
+                <form-element label="">
+                    <div class="text-right">
+                        <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Отмена</a>
+                        <button ng-click="saveReport(report);"
+                                ng-disabled="report_form.$invalid || enableUpdate"
+                                class="btn btn-sm btn-primary"
+                                type="submit">
+                            <i class="ace-icon fa fa-check"></i>{{buttonText}}
+                        </button>
+                    </div>
+                </form-element>
+            </div>
+        </form>
+    </div>
+
